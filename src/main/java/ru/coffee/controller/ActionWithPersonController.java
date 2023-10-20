@@ -24,19 +24,19 @@ public class ActionWithPersonController {
 
 
     public void run() {
-
+        String[] personArray;
+        Person person;
         try (BufferedReader readerFromFile = new BufferedReader(new FileReader("students.csv"))) {
             String readLineFromFile = readerFromFile.readLine();
             while ((readLineFromFile = readerFromFile.readLine()) != null) {
-                String[] personArray = readLineFromFile.split(";");
-                Person person = new Person();
+                personArray = readLineFromFile.split(";");
+                person = new Person();
                 mapToPerson(personArray, person);
 
                 ageCriteria.addPerson(person);
                 classroomCriteria.addPerson(person);
-//                firstLetterCriteria.addPerson(person);
-//                System.out.println(ageCriteria.getPerson(4));
-//                return;
+                firstLetterCriteria.addPerson(person);
+
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -45,27 +45,24 @@ public class ActionWithPersonController {
         System.out.print("Welcome to our application for\n" +
                          "Here you can find out average score of high school student please input: '1'\n" +
                          "You can find excellent student under 14 y. o. input: '2'\n" +
-                         "And finally find out student on last name input: '3', and then input last name: 'Абрамов' for example\n" +
-                         "Input: ");
+                         "And finally find out student on last name input: '3', and then input last name: 'Абрамов' for example\n");
         try (BufferedReader readerFromConsole = new BufferedReader(new InputStreamReader(System.in))) {
-            String actionFromConsole = readerFromConsole.readLine();
-            switch (actionFromConsole) {
-                case "1" -> {
-                    util.averageScoreHighSchoolStudent();
+            while (true) {
+                System.out.print("Input: ");
+                String actionFromConsole = readerFromConsole.readLine();
+                switch (actionFromConsole) {
+                    case "1" -> util.averageScoreHighSchoolStudent();
+                    case "2" -> util.findExcellentStudent();
+                    case "3" -> {
+                        System.out.print("Enter last name: ");
+                        String lastName = readerFromConsole.readLine();
+                        util.findStudent(lastName);
+                    }
+                    default -> {
+                        return;
+                    }
 
                 }
-                case "2" -> {
-
-                    util.findExcellentStudent();
-
-                }
-                case "3" -> {
-                    System.out.print("Enter last name: ");
-                    actionFromConsole = readerFromConsole.readLine();
-                    util.findStudent(actionFromConsole);
-                }
-
-
             }
 //            readerFromFile.readLine();
 //            String lineFromFile = readerFromFile.readLine();

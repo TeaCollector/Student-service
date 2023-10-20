@@ -25,7 +25,7 @@ public class AgePersonCriteriaImpl implements PersonCriteriaService<Integer> {
         return personMap.get(age);
     }
 
-    public int getPersonMapSize() {
-        return personMap.size();
+    public boolean ageIsPresent(int age) {
+        return personMap.containsKey(age);
     }
 }

@@ -1,6 +1,5 @@
 package ru.coffee.util;
 
-import jdk.swing.interop.SwingInterOpUtils;
 import ru.coffee.model.Person;
 import ru.coffee.service.PersonCriteriaService;
 import ru.coffee.service.impl.AgePersonCriteriaImpl;
@@ -51,12 +50,12 @@ public class Util {
 
     }
 
-//    2) Поиск всех отличников, старше 14 лет
-
+    //    2) Поиск всех отличников, старше 14 лет
     public void findExcellentStudent() {
         List<Person> listWithExcellentPerson = new ArrayList<>();
-        for (int i = 15; i < ageCriteria.getPersonMapSize(); i++) {
-            List<Person> personList = ageCriteria.getPerson(i);
+        int age = 15;
+        while (ageCriteria.ageIsPresent(age)) {
+            List<Person> personList = ageCriteria.getPerson(age);
             for (Person person : personList) {
                 if (person.getGeometry() == 5 && person.getInformatics() == 5
                     && person.getLiterature() == 5 && person.getMathematics() == 5
@@ -64,14 +63,18 @@ public class Util {
                     listWithExcellentPerson.add(person);
                 }
             }
+            age++;
         }
         System.out.println(listWithExcellentPerson);
     }
 
     //    3) Поиск ученика по фамилии (фамилия ученика задается через консоль)
     public void findStudent(String lastName) {
+        char firstLetterInputLastName = lastName.charAt(0);
+
 
     }
+
 
 
     private double getAvgScore(List<Person> personList10class, double avgScore, int i) {
