@@ -61,13 +61,8 @@ public class ActionWithPersonController {
                     default -> {
                         return;
                     }
-
                 }
             }
-//            readerFromFile.readLine();
-//            String lineFromFile = readerFromFile.readLine();
-//            System.out.println(lineFromFile);
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

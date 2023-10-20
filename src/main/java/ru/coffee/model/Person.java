@@ -108,7 +108,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return name + " " + lastName + ", класс: " + classroom + ", возраст: " + age;
+        return name + " " + lastName + ", класс: " + classroom + ", возраст: " + age + ";";
     }
 
     @Override

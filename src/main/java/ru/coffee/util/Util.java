@@ -10,7 +10,7 @@ import java.util.List;
 public class Util {
 
     private PersonCriteriaService<Integer> classroomCriteria;
-    private AgePersonCriteriaImpl ageCriteria;
+    private PersonCriteriaService<Integer> ageCriteria;
     private PersonCriteriaService<Character> firstLetterCriteria;
 
     public Util(PersonCriteriaService<Integer> classroomCriteria,
@@ -21,40 +21,29 @@ public class Util {
         this.firstLetterCriteria = firstLetterCriteria;
     }
 
-
     public void averageScoreHighSchoolStudent() {
-        List<Person> personList10class = classroomCriteria.getPerson(9);
+        List<Person> personList10class = classroomCriteria.getPerson(10);
         List<Person> personList11class = classroomCriteria.getPerson(11);
         double avgScore = 0;
         for (int i = 0; i < personList10class.size(); i++) {
             avgScore = getAvgScore(personList10class, avgScore, i);
         }
-
         avgScore /= personList10class.size();
         System.out.println("\nAverage grade on 10 class is: " + avgScore);
 
-        // Rounding:
-//        String formattedDouble = new DecimalFormat("#0.00").format(avgScore);
-//        System.out.println("\nAverage grade
-
         avgScore = 0;
         for (int i = 0; i < personList11class.size(); i++) {
-            avgScore = getAvgScore(personList10class, avgScore, i);
+            avgScore = getAvgScore(personList11class, avgScore, i);
         }
 
-        // Rounding:
-//        String formattedDouble = new DecimalFormat("#0.00").format(avgScore);
-//        System.out.println("\nAverage grade on 10 class is: " + formattedDouble);
         avgScore /= personList11class.size();
         System.out.println("Average grade on 11 class on Geometry: " + avgScore);
-
     }
 
-    //    2) Поиск всех отличников, старше 14 лет
     public void findExcellentStudent() {
         List<Person> listWithExcellentPerson = new ArrayList<>();
         int age = 15;
-        while (ageCriteria.ageIsPresent(age)) {
+        while (ageCriteria.keyIsPresent(age)) {
             List<Person> personList = ageCriteria.getPerson(age);
             for (Person person : personList) {
                 if (person.getGeometry() == 5 && person.getInformatics() == 5
@@ -65,17 +54,18 @@ public class Util {
             }
             age++;
         }
-        System.out.println(listWithExcellentPerson);
+        listWithExcellentPerson.forEach(System.out::println);
     }
 
-    //    3) Поиск ученика по фамилии (фамилия ученика задается через консоль)
     public void findStudent(String lastName) {
-        char firstLetterInputLastName = lastName.charAt(0);
-
-
+        char firstLetterLastName = lastName.charAt(0);
+        List<Person> personList = firstLetterCriteria.getPerson(firstLetterLastName);
+        for (Person person : personList) {
+            if (lastName.equals(person.getLastName())) {
+                System.out.println(person);
+            }
+        }
     }
-
-
 
     private double getAvgScore(List<Person> personList10class, double avgScore, int i) {
         double averageOnePerson = 0;

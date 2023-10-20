@@ -5,6 +5,9 @@ import ru.coffee.service.PersonCriteriaService;
 
 import java.util.*;
 
+// Решил сделать через готовую реализацию HashMap, по 'О' нотации сложность доступа к элементам будет
+// константой, добавление элементов будет так же O(1), что является самым быстрым вариантов из всех возможных.
+
 public class FirstLetterCriteriaImpl implements PersonCriteriaService<Character> {
 
     private Map<Character, List<Person>> personMap = new HashMap<>();
@@ -21,7 +24,12 @@ public class FirstLetterCriteriaImpl implements PersonCriteriaService<Character>
     }
 
     @Override
-    public List<Person> getPerson(Character letter) {
-        return personMap.get(letter);
+    public List<Person> getPerson(Character key) {
+        return personMap.get(key);
+    }
+
+    @Override
+    public boolean keyIsPresent(Character key) {
+        return personMap.containsKey(key);
     }
 }

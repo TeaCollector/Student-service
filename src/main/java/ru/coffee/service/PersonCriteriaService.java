@@ -8,5 +8,7 @@ public interface PersonCriteriaService<T> {
 
     void addPerson(Person person);
 
-    List<Person> getPerson(T item);
+    List<Person> getPerson(T key);
+
+    boolean keyIsPresent(T key);
 }
