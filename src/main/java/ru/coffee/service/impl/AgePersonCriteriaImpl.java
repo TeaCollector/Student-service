@@ -8,7 +8,7 @@ import java.util.*;
 // Решил сделать через готовую реализацию HashMap, по 'О' нотации сложность доступа к элементам будет
 // константой, добавление элементов будет так же O(1), что является самым быстрым вариантов из всех возможных.
 
-public class AgePersonCriteriaImpl implements PersonCriteriaService<Integer> {
+public class AgePersonCriteriaImpl extends AbstractMap implements PersonCriteriaService<Integer> {
 
     private Map<Integer, List<Person>> personMap = new HashMap<>();
 
@@ -31,5 +31,10 @@ public class AgePersonCriteriaImpl implements PersonCriteriaService<Integer> {
     @Override
     public boolean keyIsPresent(Integer age) {
         return personMap.containsKey(age);
+    }
+
+    @Override
+    public Set<Entry> entrySet() {
+        return null;
     }
 }
