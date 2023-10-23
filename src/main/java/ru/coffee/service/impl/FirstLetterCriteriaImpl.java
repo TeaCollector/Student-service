@@ -1,35 +1,36 @@
 package ru.coffee.service.impl;
 
 import ru.coffee.model.Person;
+import ru.coffee.repository.PersonCriteriaRepository;
 import ru.coffee.service.PersonCriteriaService;
+import ru.coffee.util.Util;
 
-import java.util.*;
+public class FirstLetterCriteriaImpl implements PersonCriteriaService<String> {
 
-// Решил сделать через готовую реализацию HashMap, по 'О' нотации сложность доступа к элементам будет
-// константой, добавление элементов будет так же O(1), что является самым быстрым вариантов из всех возможных.
+    private PersonCriteriaRepository criteriaRepository;
+    private Util util;
 
-public class FirstLetterCriteriaImpl implements PersonCriteriaService<Character> {
-
-    private Map<Character, List<Person>> personMap = new HashMap<>();
+    public FirstLetterCriteriaImpl(PersonCriteriaRepository criteriaRepository, Util util) {
+        this.criteriaRepository = criteriaRepository;
+        this.util = util;
+    }
 
     @Override
     public void addPerson(Person person) {
-        if (personMap.containsKey(person.getLastName().charAt(0))) {
-            List<Person> personList = personMap.get(person.getLastName().charAt(0));
-            personList.add(person);
-            personMap.put(person.getLastName().charAt(0), personList);
-        } else {
-            personMap.put(person.getLastName().charAt(0), new ArrayList<>(Arrays.asList(person)));
-        }
+        criteriaRepository.addPerson(person);
     }
 
     @Override
-    public List<Person> getPerson(Character key) {
-        return personMap.get(key);
+    public Person[] getPerson(String lastName) {
+        return criteriaRepository.getPerson(lastName);
     }
 
     @Override
-    public boolean keyIsPresent(Character key) {
-        return personMap.containsKey(key);
+    public boolean keyIsPresent(String lastName) {
+        return criteriaRepository.keyIsPresent(lastName);
+    }
+
+    public void actionWithPerson(String lastName) {
+        util.findPerson(getPerson(lastName), lastName);
     }
 }
