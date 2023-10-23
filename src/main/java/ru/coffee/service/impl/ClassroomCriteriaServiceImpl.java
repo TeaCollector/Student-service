@@ -5,19 +5,19 @@ import ru.coffee.repository.PersonCriteriaRepository;
 import ru.coffee.service.PersonCriteriaService;
 import ru.coffee.util.Util;
 
-public class AgePersonCriteriaImpl implements PersonCriteriaService<Integer> {
+public class ClassroomCriteriaServiceImpl implements PersonCriteriaService<Integer> {
 
-
-    private PersonCriteriaRepository<Integer> criteriaRepository;
+    private PersonCriteriaRepository criteriaRepository;
     private Util util;
 
-    public AgePersonCriteriaImpl(PersonCriteriaRepository<Integer> criteriaRepository, Util util) {
+    public ClassroomCriteriaServiceImpl(PersonCriteriaRepository criteriaRepository, Util util) {
         this.criteriaRepository = criteriaRepository;
         this.util = util;
     }
 
+    @Override
     public void addPerson(Person person) {
-        criteriaRepository.addPerson(person);
+       criteriaRepository.addPerson(person);
     }
 
     @Override
@@ -26,12 +26,11 @@ public class AgePersonCriteriaImpl implements PersonCriteriaService<Integer> {
     }
 
     @Override
-    public boolean keyIsPresent(Integer age) {
-        return criteriaRepository.keyIsPresent(age);
+    public boolean keyIsPresent(Integer key) {
+        return criteriaRepository.keyIsPresent(key);
     }
 
     public void actionWithPerson(Integer digit) {
-        Person[][] arrayWithPersonUnder14yo = {getPerson(15),getPerson(16),getPerson(17)};
-        util.findExcellentStudent(arrayWithPersonUnder14yo);
+       util.averageScoreHighSchoolStudent(getPerson(10), getPerson(11));
     }
 }
