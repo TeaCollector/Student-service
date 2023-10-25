@@ -2,14 +2,16 @@ package ru.coffee.service;
 
 import ru.coffee.input.DataLoader;
 
+import java.io.BufferedReader;
+
 public class StudentService {
 
-    private DataLoader dataLoader;
-    public StudentService(DataLoader dataLoader) {
+    private DataLoader<BufferedReader> dataLoader;
+    public StudentService(DataLoader<BufferedReader> dataLoader) {
         this.dataLoader = dataLoader;
     }
 
-    public String loadData() {
+    public BufferedReader loadData() {
         return dataLoader.load();
     }
 }

@@ -1,5 +1,8 @@
 package ru.coffee.input;
 
-public interface DataLoader {
-    String load();
+
+import java.io.BufferedReader;
+
+public interface DataLoader<T> {
+    T load();
 }

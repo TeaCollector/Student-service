@@ -32,20 +32,25 @@ public class Application {
      * а те хранят данные по своему (по классу, по возрасту и по первой букве фамилии
      */
     public void run() {
-        DataLoader dataLoader = new DataFromFile();
+        DataLoader<BufferedReader> dataLoader = new DataFromFile();
         StudentService studentService = new StudentService(dataLoader);
         String[] personArray;
         Person person;
-        studentService.loadData();
-        while (true) {
-            personArray = studentService.loadData().split(";");
-            person = new Person();
-            mapToPerson(personArray, person);
-            classroomCriteria.addPerson(person);
-            ageCriteria.addPerson(person);
-            firstLetterCriteria.addPerson(person);
-        }
+        try {
+            BufferedReader br = studentService.loadData();
+            String data = br.readLine();
+            while ((data = br.readLine()) != null) {
+                personArray = data.split(";");
+                person = new Person();
+                mapToPerson(personArray, person);
+                classroomCriteria.addPerson(person);
+                ageCriteria.addPerson(person);
+                firstLetterCriteria.addPerson(person);
+            }
 
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         System.out.print("Welcome to our application for\n" +
                          "Here you can find out average score of high school student please input: '1'\n" +
                          "You can find excellent student under 14 y. o. input: '2'\n" +
@@ -60,11 +65,11 @@ public class Application {
                 switch (actionFromConsole) {
                     case "1" -> {
                         Command<Integer> avg = new AverageScore();
-                        commandBuilder.action(ageCriteria, avg, 0);
+                        commandBuilder.action(classroomCriteria, avg, 0);
                     }
                     case "2" -> {
                         Command<Integer> excellent = new ExcellentPerson();
-                        commandBuilder.action(classroomCriteria, excellent, 0);
+                        commandBuilder.action(ageCriteria, excellent, 0);
                     }
                     case "3" -> {
                         System.out.print("Enter last name: ");
