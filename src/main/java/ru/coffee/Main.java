@@ -19,11 +19,9 @@ public class Main {
         GroupCriteria<Integer> classroomService = new ClassroomCriteriaImpl(classroomRepo);
         GroupCriteria<Integer> ageService = new AgeGroupCriteriaImpl(ageRepo);
 
-        DataGroup<String> firstNameGroup = new DataGroup<>(firstLetterService);
-        DataGroup<Integer> classroomGroup = new DataGroup<>(classroomService);
-        DataGroup<Integer> ageGroup = new DataGroup<>(ageService);
+        Application application = new Application(ageService, classroomService, firstLetterService);
 
-        firstNameGroup.run();
+        application.run();
 
 
 

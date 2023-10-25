@@ -10,8 +10,8 @@ import ru.coffee.util.Util;
 
 public class FirstLetterCriteriaRepoImpl implements PersonCriteriaRepository<String> {
 
-    private char[] firstLetterArray;
-    private Person[][] personArray;
+    private final char[] firstLetterArray;
+    private final Person[][] personArray;
 
     public FirstLetterCriteriaRepoImpl() {
         firstLetterArray = new char[]{'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т',

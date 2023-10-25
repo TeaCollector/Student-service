@@ -9,6 +9,7 @@ public class DataFromFile implements DataLoader {
     public String load() {
         try {
             BufferedReader br = new BufferedReader(new FileReader("students.csv"));
+            br.readLine();
             return br.readLine();
         } catch (IOException e) {
             throw new RuntimeException(e);

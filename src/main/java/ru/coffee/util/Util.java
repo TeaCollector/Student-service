@@ -3,15 +3,6 @@ package ru.coffee.util;
 import ru.coffee.model.Person;
 
 public class Util {
-
-    public void averageScoreHighSchoolStudent(Person[] person10class, Person[] person11class) {
-
-    }
-
-
-
-
-
     public static void fillingArray(Person param, int positionAtPerson, Person[][] personArray) {
         Person[] personWithFirstLetter = personArray[positionAtPerson];
         int indexForInsert = 0;

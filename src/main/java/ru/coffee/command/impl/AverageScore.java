@@ -4,7 +4,7 @@ import ru.coffee.command.Command;
 import ru.coffee.model.Person;
 import ru.coffee.service.GroupCriteria;
 
-public class FindExcellentPerson implements Command<Integer> {
+public class AverageScore implements Command<Integer> {
 
     @Override
     public void execute(GroupCriteria<Integer> service, Integer param) {

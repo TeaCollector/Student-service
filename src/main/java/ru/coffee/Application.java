@@ -2,33 +2,29 @@ package ru.coffee;
 
 import ru.coffee.command.Command;
 import ru.coffee.command.CommandBuilder;
-import ru.coffee.command.impl.AverageScoreHighSchoolPerson;
-import ru.coffee.command.impl.FindExcellentPerson;
+import ru.coffee.command.impl.ExcellentPerson;
+import ru.coffee.command.impl.AverageScore;
 import ru.coffee.command.impl.FindPersonCommand;
+import ru.coffee.input.DataLoader;
+import ru.coffee.input.impl.DataFromFile;
 import ru.coffee.model.Person;
 import ru.coffee.service.GroupCriteria;
 import ru.coffee.service.StudentService;
 
 import java.io.*;
 
-public class DataGroup {
+public class Application {
 
-    private GroupCriteria<Integer> ageCriteria;
-    private GroupCriteria<Integer> classroomCriteria;
-    private GroupCriteria<String> firstLetterCriteria;
-    private StudentService studentService;
-    private Command<?> command;
+    private final GroupCriteria<Integer> ageCriteria;
+    private final GroupCriteria<Integer> classroomCriteria;
+    private final GroupCriteria<String> firstLetterCriteria;
 
-    public DataGroup(GroupCriteria<Integer> ageCriteria,
-                     GroupCriteria<Integer> classroomCriteria,
-                     GroupCriteria<String> firstLetterCriteria,
-                     Command<?> command, StudentService studentService) {
+    public Application(GroupCriteria<Integer> ageCriteria,
+                       GroupCriteria<Integer> classroomCriteria,
+                       GroupCriteria<String> firstLetterCriteria) {
         this.ageCriteria = ageCriteria;
         this.classroomCriteria = classroomCriteria;
         this.firstLetterCriteria = firstLetterCriteria;
-
-        this.command = command;
-        this.studentService = studentService;
     }
 
     /**
@@ -36,15 +32,19 @@ public class DataGroup {
      * а те хранят данные по своему (по классу, по возрасту и по первой букве фамилии
      */
     public void run() {
+        DataLoader dataLoader = new DataFromFile();
+        StudentService studentService = new StudentService(dataLoader);
         String[] personArray;
         Person person;
-        String readLineFromFile = studentService.loadData();
-        personArray = studentService.loadData().split(";");
-        person = new Person();
-        mapToPerson(personArray, person);
-        classroomCriteria.addPerson(person);
-        ageCriteria.addPerson(person);
-        firstLetterCriteria.addPerson(person);
+        studentService.loadData();
+        while (true) {
+            personArray = studentService.loadData().split(";");
+            person = new Person();
+            mapToPerson(personArray, person);
+            classroomCriteria.addPerson(person);
+            ageCriteria.addPerson(person);
+            firstLetterCriteria.addPerson(person);
+        }
 
         System.out.print("Welcome to our application for\n" +
                          "Here you can find out average score of high school student please input: '1'\n" +
@@ -59,19 +59,18 @@ public class DataGroup {
                 CommandBuilder commandBuilder = new CommandBuilder(studentService);
                 switch (actionFromConsole) {
                     case "1" -> {
-                        Command<Integer> avg = new AverageScoreHighSchoolPerson();
-                        commandBuilder.action(avg, 0);
+                        Command<Integer> avg = new AverageScore();
+                        commandBuilder.action(ageCriteria, avg, 0);
                     }
                     case "2" -> {
-                        Command<Integer> excellent = new FindExcellentPerson();
-                        commandBuilder.action(excellent, 0);
+                        Command<Integer> excellent = new ExcellentPerson();
+                        commandBuilder.action(classroomCriteria, excellent, 0);
                     }
-
                     case "3" -> {
                         System.out.print("Enter last name: ");
                         String lastName = readerFromConsole.readLine();
                         Command<String> findPerson = new FindPersonCommand();
-                        findPerson.execute(firstLetterCriteria, lastName);
+                        commandBuilder.action(firstLetterCriteria, findPerson, lastName);
                     }
                     default -> {
                         return;

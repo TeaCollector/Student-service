@@ -10,7 +10,7 @@ import ru.coffee.util.Util;
 
 public class AgeCriteriaRepoImpl implements PersonCriteriaRepository<Integer> {
 
-    private Person[][] personArray;
+    private final Person[][] personArray;
 
     public AgeCriteriaRepoImpl() {
         int age = 100;
