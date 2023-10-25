@@ -2,17 +2,14 @@ package ru.coffee.service.impl;
 
 import ru.coffee.model.Person;
 import ru.coffee.repository.PersonCriteriaRepository;
-import ru.coffee.service.PersonCriteriaService;
-import ru.coffee.util.Util;
+import ru.coffee.service.GroupCriteria;
 
-public class FirstLetterCriteriaImpl implements PersonCriteriaService<String> {
+public class FirstLetterCriteriaImpl implements GroupCriteria<String> {
 
-    private PersonCriteriaRepository criteriaRepository;
-    private Util util;
+    private PersonCriteriaRepository<String> criteriaRepository;
 
-    public FirstLetterCriteriaImpl(PersonCriteriaRepository criteriaRepository, Util util) {
+    public FirstLetterCriteriaImpl(PersonCriteriaRepository<String> criteriaRepository) {
         this.criteriaRepository = criteriaRepository;
-        this.util = util;
     }
 
     @Override
@@ -30,7 +27,4 @@ public class FirstLetterCriteriaImpl implements PersonCriteriaService<String> {
         return criteriaRepository.keyIsPresent(lastName);
     }
 
-    public void actionWithPerson(String lastName) {
-        util.findPerson(getPerson(lastName), lastName);
-    }
 }

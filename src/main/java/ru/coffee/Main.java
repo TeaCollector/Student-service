@@ -1,31 +1,32 @@
 package ru.coffee;
 
-import ru.coffee.controller.ActionWithPersonController;
 import ru.coffee.repository.PersonCriteriaRepository;
 import ru.coffee.repository.impl.AgeCriteriaRepoImpl;
 import ru.coffee.repository.impl.ClassroomRepositoryRepoImpl;
 import ru.coffee.repository.impl.FirstLetterCriteriaRepoImpl;
-import ru.coffee.service.PersonCriteriaService;
-import ru.coffee.service.impl.AgePersonCriteriaImpl;
-import ru.coffee.service.impl.ClassroomCriteriaServiceImpl;
+import ru.coffee.service.GroupCriteria;
+import ru.coffee.service.impl.AgeGroupCriteriaImpl;
+import ru.coffee.service.impl.ClassroomCriteriaImpl;
 import ru.coffee.service.impl.FirstLetterCriteriaImpl;
-import ru.coffee.util.Util;
 
 public class Main {
     public static void main(String[] args) {
-        PersonCriteriaRepository<Integer> classroom = new ClassroomRepositoryRepoImpl();
-        PersonCriteriaRepository<String> firstLetter = new FirstLetterCriteriaRepoImpl();
-        PersonCriteriaRepository<Integer> age = new AgeCriteriaRepoImpl();
-        Util util = new Util();
+        PersonCriteriaRepository<String> firstLetterRepo = new FirstLetterCriteriaRepoImpl();
+        PersonCriteriaRepository<Integer> classroomRepo = new ClassroomRepositoryRepoImpl();
+        PersonCriteriaRepository<Integer> ageRepo = new AgeCriteriaRepoImpl();
 
-        PersonCriteriaService<Integer> classroomCriteria = new ClassroomCriteriaServiceImpl(classroom, util);
-        PersonCriteriaService<String> firstLetterCriteria = new FirstLetterCriteriaImpl(firstLetter, util);
-        PersonCriteriaService<Integer> agePersonCriteria = new AgePersonCriteriaImpl(age, util);
+        GroupCriteria<String> firstLetterService = new FirstLetterCriteriaImpl(firstLetterRepo);
+        GroupCriteria<Integer> classroomService = new ClassroomCriteriaImpl(classroomRepo);
+        GroupCriteria<Integer> ageService = new AgeGroupCriteriaImpl(ageRepo);
 
-        ActionWithPersonController actionWithPersonController = new ActionWithPersonController(agePersonCriteria,
-                classroomCriteria, firstLetterCriteria);
+        DataGroup<String> firstNameGroup = new DataGroup<>(firstLetterService);
+        DataGroup<Integer> classroomGroup = new DataGroup<>(classroomService);
+        DataGroup<Integer> ageGroup = new DataGroup<>(ageService);
 
-        actionWithPersonController.run();
+        firstNameGroup.run();
+
+
+
 
     }
 }

@@ -2,7 +2,7 @@ package ru.coffee.service;
 
 import ru.coffee.model.Person;
 
-public interface PersonCriteriaService<T> {
+public interface GroupCriteria<T> {
 
     void addPerson(Person person);
 
@@ -10,5 +10,4 @@ public interface PersonCriteriaService<T> {
 
     boolean keyIsPresent(T key);
 
-    void actionWithPerson(T param);
 }
