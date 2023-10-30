@@ -4,6 +4,7 @@ import ru.coffee.service.GroupCriteria;
 import ru.coffee.service.StudentService;
 
 public class CommandBuilder {
+
     private final StudentService studentService;
 
     public CommandBuilder(StudentService studentService) {

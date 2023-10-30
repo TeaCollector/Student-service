@@ -37,15 +37,20 @@ public class Application {
         String[] personArray;
         Person person;
         try {
+
             BufferedReader br = studentService.loadData();
             String data = br.readLine();
             while ((data = br.readLine()) != null) {
                 personArray = data.split(";");
                 person = new Person();
-                mapToPerson(personArray, person);
-                classroomCriteria.addPerson(person);
-                ageCriteria.addPerson(person);
-                firstLetterCriteria.addPerson(person);
+
+
+//                creatingAndFillingDB(mapToPerson(personArray, person);
+
+
+//                classroomCriteria.addPerson(person);
+//                ageCriteria.addPerson(person);
+//                firstLetterCriteria.addPerson(person);
             }
 
         } catch (IOException e) {
