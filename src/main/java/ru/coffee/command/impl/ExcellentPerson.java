@@ -1,13 +1,13 @@
 package ru.coffee.command.impl;
 
 import ru.coffee.command.Command;
-import ru.coffee.model.Person;
-import ru.coffee.service.GroupCriteria;
+import ru.coffee.domain.model.Person;
+import ru.coffee.service.Service;
 
 public class ExcellentPerson implements Command<Integer> {
 
     @Override
-    public void execute(GroupCriteria<Integer> service, Integer param) {
+    public void execute(Service<Integer> service, Integer param) {
         Person[][] personsArray = {service.getPerson(15),
                                      service.getPerson(16),
                                      service.getPerson(17)};

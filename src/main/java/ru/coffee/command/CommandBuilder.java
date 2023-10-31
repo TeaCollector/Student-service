@@ -1,6 +1,6 @@
 package ru.coffee.command;
 
-import ru.coffee.service.GroupCriteria;
+import ru.coffee.service.Service;
 import ru.coffee.service.StudentService;
 
 public class CommandBuilder {
@@ -11,8 +11,8 @@ public class CommandBuilder {
         this.studentService = studentService;
     }
 
-    public <T> void action(GroupCriteria<T> groupCriteria, Command<T> command, T param) {
-        command.execute(groupCriteria, param);
+    public <T> void action(Service<T> service, Command<T> command, T param) {
+        command.execute(service, param);
     }
 
 }

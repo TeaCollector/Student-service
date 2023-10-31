@@ -1,6 +1,6 @@
 package ru.coffee.util;
 
-import ru.coffee.model.Person;
+import ru.coffee.domain.model.Person;
 
 public class Util {
     public static void fillingArray(Person param, int positionAtPerson, Person[][] personArray) {

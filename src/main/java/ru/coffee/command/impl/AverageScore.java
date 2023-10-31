@@ -1,13 +1,13 @@
 package ru.coffee.command.impl;
 
 import ru.coffee.command.Command;
-import ru.coffee.model.Person;
-import ru.coffee.service.GroupCriteria;
+import ru.coffee.domain.model.Person;
+import ru.coffee.service.Service;
 
 public class AverageScore implements Command<Integer> {
 
     @Override
-    public void execute(GroupCriteria<Integer> service, Integer param) {
+    public void execute(Service<Integer> service, Integer param) {
         Person[] person10class = service.getPerson(10);
         Person[] person11class = service.getPerson(11);
         double avgOfAllPerson = 0;
@@ -47,4 +47,5 @@ public class AverageScore implements Command<Integer> {
         avgScore += person.getRus();
         avgScore /= 6;
         return avgScore;
-    }}
+    }
+}

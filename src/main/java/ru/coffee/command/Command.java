@@ -1,7 +1,7 @@
 package ru.coffee.command;
 
-import ru.coffee.service.GroupCriteria;
+import ru.coffee.service.Service;
 
 public interface Command<T> {
-    void execute(GroupCriteria<T> groupCriteria, T param);
+    void execute(Service<T> service, T param);
 }

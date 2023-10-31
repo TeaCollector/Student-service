@@ -1,10 +1,7 @@
-package ru.coffee.model;
+package ru.coffee.domain.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Objects;
 
 @Data
 @NoArgsConstructor
@@ -20,11 +17,4 @@ public class Person {
     private int literature;
     private int geometry;
     private int informatics;
-
-    public Person(String name, String lastName, int age, int classroom) {
-        this.name = name;
-        this.lastName = lastName;
-        this.age = age;
-        this.classroom = classroom;
-    }
 }
