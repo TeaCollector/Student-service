@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'application'
+    id "com.netflix.nebula.jakartaee-migration" version "0.20.0"
+    id 'war'
 }
 
 group 'ru.coffee'
@@ -29,6 +31,11 @@ dependencies {
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     testImplementation "org.testng:testng:6.10", "org.easytesting:fest-assert:1.4"
     annotationProcessor "org.mapstruct:mapstruct-processor:1.5.5.Final"
+
+    implementation 'org.apache.tomcat:tomcat-catalina:10.1.15'
+
+
+
 
 }
 

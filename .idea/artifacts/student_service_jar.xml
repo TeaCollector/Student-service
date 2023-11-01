@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="student-service:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/student_service_jar</output-path>
+    <root id="archive" name="student-service.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="student-service.main" />
+      <element id="extracted-dir" path="$USER_HOME$/.sdkman/candidates/gradle/8.3/caches/modules-2/files-2.1/org.junit.platform/junit-platform-commons/1.9.2/6f9f8621d8230cd38aa42e58ccbc0c00569131ce/junit-platform-commons-1.9.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.sdkman/candidates/gradle/8.3/caches/modules-2/files-2.1/org.junit.platform/junit-platform-engine/1.9.2/40aeef2be7b04f96bb91e8b054affc28b7c7c935/junit-platform-engine-1.9.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.sdkman/candidates/gradle/8.3/caches/modules-2/files-2.1/org.postgresql/postgresql/42.6.0/7614cfce466145b84972781ab0079b8dea49e363/postgresql-42.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.sdkman/candidates/gradle/8.3/caches/modules-2/files-2.1/org.easytesting/fest-util/1.1.6/e785ee9c1f314bbf9e5a824b85143e440642557a/fest-util-1.1.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.sdkman/candidates/gradle/8.3/caches/modules-2/files-2.1/org.checkerframework/checker-qual/3.31.0/eeefd4af42e2f4221d145c1791582f91868f99ab/checker-qual-3.31.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.sdkman/candidates/gradle/8.3/caches/modules-2/files-2.1/org.opentest4j/opentest4j/1.2.0/28c11eb91f9b6d8e200631d46e20a7f407f2a046/opentest4j-1.2.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.sdkman/candidates/gradle/8.3/caches/modules-2/files-2.1/org.testng/testng/6.10/368d38d0f6906934b572e1a26441b6f47c58b134/testng-6.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.sdkman/candidates/gradle/8.3/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-engine/5.9.2/572f7a553b53f83ee59cc045ce1c3772864ab76c/junit-jupiter-engine-5.9.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.sdkman/candidates/gradle/8.3/caches/modules-2/files-2.1/org.easytesting/fest-assert/1.4/88ec2d3bbc35a2e9613f584b29e26adb1bc2c515/fest-assert-1.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.sdkman/candidates/gradle/8.3/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.9.2/fed843581520eac594bc36bb4b0f55e7b947dda9/junit-jupiter-api-5.9.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.sdkman/candidates/gradle/8.3/caches/modules-2/files-2.1/org.mapstruct/mapstruct/1.5.5.Final/2ca3cbe39b6e9ea8d5ea521965a89bef2a1e8eeb/mapstruct-1.5.5.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.sdkman/candidates/gradle/8.3/caches/modules-2/files-2.1/com.beust/jcommander/1.48/bfcb96281ea3b59d626704f74bc6d625ff51cbce/jcommander-1.48.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
