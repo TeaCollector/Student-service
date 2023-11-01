@@ -1,6 +1,7 @@
 package ru.coffee;
 
 import ru.coffee.config.DBConnection;
+import ru.coffee.domain.dto.PersonDto;
 import ru.coffee.domain.model.Person;
 import ru.coffee.mapper.PersonMapper;
 import ru.coffee.repository.Repository;
@@ -16,9 +17,9 @@ public class Main {
 
         PersonMapper personMapper = PersonMapper.INSTANCE;
 
-        Repository<Person> repository = new PersonRepositoryImpl(provider);
+        Repository<Person, PersonDto> repository = new PersonRepositoryImpl(provider, personMapper);
 
-        Service<Person> personService = new PersonServiceImpl(repository);
+        Service<Person, PersonDto> personService = new PersonServiceImpl(repository);
 
         Application application = new Application(personService, personMapper);
 

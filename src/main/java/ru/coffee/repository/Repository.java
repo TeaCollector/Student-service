@@ -1,5 +1,16 @@
 package ru.coffee.repository;
 
-public interface Repository<T> {
+
+import java.math.BigDecimal;
+import java.util.List;
+
+public interface Repository<T, D> {
+
     T addPerson(T person);
+
+    List<BigDecimal> averageScore();
+
+    List<D> excellentPerson();
+
+    List<D> personsAverage(String name);
 }

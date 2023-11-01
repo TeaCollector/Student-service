@@ -1,13 +1,11 @@
-package ru.coffee.domain.model;
+package ru.coffee.domain.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-public class Person {
-
+public class PersonDto {
     private String name;
     private String lastName;
     private int age;
@@ -19,5 +17,4 @@ public class Person {
     private int geometry;
     private int informatics;
     private double average;
-
 }

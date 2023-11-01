@@ -1,31 +1,8 @@
 # Application to store user and do some action.
 ## For using:
 1. Clone repository through SSH: `https://github.com/TeaCollector/Student-service.git`
-2. Input from source root in commandline: `./gradlew run --console=plain`
-3. Read carefully massage in output.
-4. Enjoy it!
-   
-
-
-
-Сейчас в работе есть три конкретных класса, осуществляющие группировку данных по критерию и простой вывод
-результата работы этих классов в консоль. В качестве развития, предлагаем сделать следующее:
-
-1) Выделить один класс DataGroup, который в качестве аргумента принимает лямбду, которая по конкретному
-   объекту person определяет к какой группе он относиться. Таким образом будет реализован open-close принцип
-   (реализации какой-либо еще группировки достаточно написать нужную лямбду, а класс DataGroup при этом никак не
-   меняется).
-
-2) Выделить Функциональный интерфейс GroupCriterion, который по person будет определять ключ группы (ну и
-реализовать три варианта, по возрасту, фамилии и классу)
-
-3) Выделить интерфейс Command, наследники которого будет отвечать за обработку конкретных консольных команд.
-
-4) Выделить интерфейс DataLoader и реализовать его конкретный вариант загрузки данных из файла.
-
-5) Выделить сервис StudentService, которые в конструкторе будет получать DataLoader, чтобы загрузить данные.
-
-6) Написать CommandBuilder, который зависит от StudentService и умеет создавать 
-   конкретные команды (классы, реализующие интерфейс Command и обрабатывающие консольные команды).
-7) Реализовать три конкретных консольных команды, которые собирают ту же статистику, что и классы группировки
-   из первого задания
+2. For download From work directory input: `sudo docker-compose-up -d`
+3. Input from source root in commandline: `./gradlew run --console=plain`
+4. Please wait 2 minutes for copy all data from .scv file to postgres container...
+5. Read carefully massage in output.
+6. Enjoy it!

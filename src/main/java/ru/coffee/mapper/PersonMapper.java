@@ -14,18 +14,21 @@ public interface PersonMapper {
     @Mapping(source = "name", target = "name")
     PersonDto personToPersonDto(Person person);
 
-    @Mapping(source = "lastname", target = "lastName")
+    @Mapping(source = "lastName", target = "lastName")
     Person personDtoToPerson(PersonDto personDto);
 
-    default PersonDto fromFileToPersonDto(String[] personArray) {
-        return new PersonDto(personArray[1], personArray[0],
-                Integer.parseInt(personArray[2]),
-                Integer.parseInt(personArray[3]),
-                Integer.parseInt(personArray[4]),
-                Integer.parseInt(personArray[5]),
-                Integer.parseInt(personArray[6]),
-                Integer.parseInt(personArray[7]),
-                Integer.parseInt(personArray[8]),
-                Integer.parseInt(personArray[9]));
+    default PersonDto stringToPersonDto(String[] personFromString) {
+        return PersonDto.builder()
+                .name(personFromString[1])
+                .lastName(personFromString[0])
+                .age(Integer.parseInt(personFromString[2]))
+                .classroom(Integer.parseInt(personFromString[3]))
+                .physics(Integer.parseInt(personFromString[4]))
+                .mathematics(Integer.parseInt(personFromString[5]))
+                .rus(Integer.parseInt(personFromString[6]))
+                .literature(Integer.parseInt(personFromString[7]))
+                .geometry(Integer.parseInt(personFromString[8]))
+                .informatics(Integer.parseInt(personFromString[9]))
+                .build();
     }
 }

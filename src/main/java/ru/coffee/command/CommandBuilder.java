@@ -3,7 +3,9 @@ package ru.coffee.command;
 import ru.coffee.service.Service;
 import ru.coffee.service.StudentService;
 
-public class CommandBuilder {
+import java.util.List;
+
+public class CommandBuilder<T, D> {
 
     private final StudentService studentService;
 
@@ -11,8 +13,11 @@ public class CommandBuilder {
         this.studentService = studentService;
     }
 
-    public <T> void action(Service<T> service, Command<T> command, T param) {
-        command.execute(service, param);
+    public List<D> action(Service<T, D> service, Command<T, D> command) {
+        return command.execute(service);
     }
 
+    public List<D> actionWithArgument(Service<T, D> service, CommandWithArgument<T, D> command, String lastName) {
+        return command.execute(service, lastName);
+    }
 }

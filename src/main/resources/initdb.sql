@@ -6,8 +6,14 @@ CREATE TABLE IF NOT EXISTS lesson
 
 CREATE TABLE IF NOT EXISTS person_progress
 (
-    pp_id SERIAL PRIMARY KEY,
-    score INT[]
+    pp_id       SERIAL PRIMARY KEY,
+    physic      INT,
+    mathematics INT,
+    rus         INT,
+    literature  INT,
+    geometry    INT,
+    informatics INT
+
 );
 
 CREATE TABLE IF NOT EXISTS class
@@ -19,8 +25,8 @@ CREATE TABLE IF NOT EXISTS class
 CREATE TABLE IF NOT EXISTS person
 (
     person_id SERIAL PRIMARY KEY,
-    name      VARCHAR(20) NOT NULL,
     last_name VARCHAR(25) NOT NULL,
+    name      VARCHAR(20) NOT NULL,
     age       INT         NOT NULL,
     class_id  INT,
     pp_id     SERIAL,
@@ -37,5 +43,15 @@ VALUES ('physic'),
        ('informatics');
 
 INSERT INTO class (class_number)
-VALUES (1), (2), (3), (4), (5), (6), (7), (8), (9), (10), (11), (12);
-
+VALUES (1),
+       (2),
+       (3),
+       (4),
+       (5),
+       (6),
+       (7),
+       (8),
+       (9),
+       (10),
+       (11),
+       (12);

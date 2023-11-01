@@ -1,11 +1,16 @@
 package ru.coffee.service;
 
-import ru.coffee.domain.model.Person;
+import java.math.BigDecimal;
+import java.util.List;
 
-public interface Service<T> {
+public interface Service<T, D> {
 
     T addPerson(T person);
 
-    Person[] getPerson(T key);
+    List<BigDecimal> averageScore();
+
+    List<D> excellentPerson();
+
+    List<D> personsAverage(String name);
 
 }

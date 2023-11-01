@@ -38,7 +38,7 @@ public class DBConnection {
         Connection connection = getConnection();
         try {
             Statement initTable = connection.createStatement();
-            String sqlScript = new String(Files.readAllBytes(Paths.get("initdb.sql")));
+            String sqlScript = new String(Files.readAllBytes(Paths.get("src/main/resources/initdb.sql")));
             initTable.executeUpdate(sqlScript);
 
         } catch (SQLException | IOException e) {
