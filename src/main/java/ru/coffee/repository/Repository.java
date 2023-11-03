@@ -13,4 +13,9 @@ public interface Repository<T, D> {
     List<D> excellentPerson();
 
     List<D> personsAverage(String name);
+
+    D changePersonsScore(D personDto);
+
+    List<D> findAverageScoreConcreteClass(int classroom);
+
 }

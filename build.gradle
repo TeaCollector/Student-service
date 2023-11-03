@@ -34,6 +34,12 @@ dependencies {
 
     implementation 'org.apache.tomcat:tomcat-catalina:10.1.15'
 
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.16.0-rc1'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.16.0-rc1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0-rc1'
+
+
+
 
 
 

@@ -35,4 +35,14 @@ public class PersonServiceImpl implements Service<Person, PersonDto> {
     public List<PersonDto> personsAverage(String name) {
         return repository.personsAverage(name);
     }
+
+    @Override
+    public PersonDto changePersonsScore(PersonDto personDto) {
+        return repository.changePersonsScore(personDto);
+    }
+
+    @Override
+    public List<PersonDto> findAverageScoreConcreteClass(int classroom) {
+        return repository.findAverageScoreConcreteClass(classroom);
+    }
 }

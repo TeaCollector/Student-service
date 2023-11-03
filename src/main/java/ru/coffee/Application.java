@@ -43,10 +43,10 @@ public class Application {
             String data;
             data = br.readLine();
             while ((data = br.readLine()) != null) {
-                personArray = data.split(";");
-                PersonDto personDtoFromFile = personMapper.stringToPersonDto(personArray);
-                person = personMapper.personDtoToPerson(personDtoFromFile);
-                service.addPerson(person);
+//                personArray = data.split(";");
+//                PersonDto personDtoFromFile = personMapper.stringToPersonDto(personArray);
+//                person = personMapper.personDtoToPerson(personDtoFromFile);
+//                service.addPerson(person);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
