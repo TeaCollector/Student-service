@@ -1,10 +1,9 @@
 package ru.coffee.repository;
 
-
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface Repository<T, D> {
+public interface ConsoleRepository<T, D> extends WorkingWithBD {
 
     T addPerson(T person);
 
@@ -13,9 +12,5 @@ public interface Repository<T, D> {
     List<D> excellentPerson();
 
     List<D> personsAverage(String name);
-
-    D changePersonsScore(D personDto);
-
-    List<D> findAverageScoreConcreteClass(int classroom);
 
 }

@@ -1,11 +1,11 @@
 package ru.coffee.service;
 
-import ru.coffee.domain.dto.PersonDto;
+import ru.coffee.domain.dto.PersonDtoWithServlet;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface Service<T, D> {
+public interface ConsoleService<T, D> {
 
     T addPerson(T person);
 
@@ -14,9 +14,5 @@ public interface Service<T, D> {
     List<D> excellentPerson();
 
     List<D> personsAverage(String name);
-
-    D changePersonsScore(PersonDto personDto);
-
-    List<D> findAverageScoreConcreteClass(int classroom);
 
 }

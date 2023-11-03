@@ -1,25 +1,22 @@
 package ru.coffee.repository.impl;
 
-import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
-import org.postgresql.core.Query;
 import ru.coffee.domain.dto.PersonDto;
 import ru.coffee.domain.model.Person;
 import ru.coffee.mapper.PersonMapper;
-import ru.coffee.repository.Repository;
+import ru.coffee.repository.ConsoleRepository;
 
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonRepositoryImpl implements Repository<Person, PersonDto> {
+public class PersonConsoleRepositoryImpl implements ConsoleRepository<Person, PersonDto> {
 
     private Connection connection;
     private PersonMapper mapper;
 
 
-    public PersonRepositoryImpl(Connection connection, PersonMapper mapper) {
+    public PersonConsoleRepositoryImpl(Connection connection, PersonMapper mapper) {
         this.connection = connection;
         this.mapper = mapper;
     }
@@ -170,59 +167,4 @@ public class PersonRepositoryImpl implements Repository<Person, PersonDto> {
         return personList;
     }
 
-    @Override
-    public PersonDto changePersonsScore(PersonDto personDto) {
-
-        String sql = String.format(
-                "UPDATE person_progress " +
-                "SET %s = ? " +
-                "FROM person p " +
-                "WHERE p.name = ? " +
-                "AND p.last_name = ? " +
-                "AND p.class_id = ?", personDto.getLesson());
-        int rowUpdated;
-        try {
-
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, personDto.getScore());
-            statement.setString(2, personDto.getName());
-            statement.setString(3, personDto.getLastName());
-            statement.setInt(4, personDto.getClassroom());
-            rowUpdated = statement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        personDto.setScore(rowUpdated);
-        return personDto;
-    }
-
-    @Override
-    public List<PersonDto> findAverageScoreConcreteClass(int classroom) {
-        List<PersonDto> personDtoList = new ArrayList<>();
-
-        String sql = "SELECT p.name, p.last_name, p.class_id, " +
-                     "(pp.rus + pp.literature + pp.mathematics + " +
-                     " pp.geometry + pp.informatics + pp.physic) / 6 AS average " +
-                     "FROM person p " +
-                     "JOIN class c on p.class_id = c.class_id " +
-                     "JOIN person_progress pp on p.pp_id = pp.pp_id " +
-                     "WHERE p.class_id = ?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, classroom);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                PersonDto personDto = PersonDto.builder()
-                        .name(resultSet.getString("name"))
-                        .lastName(resultSet.getString("last_name"))
-                        .classroom(resultSet.getInt("class_id"))
-                        .average(resultSet.getInt("average"))
-                        .build();
-                personDtoList.add(personDto);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return personDtoList;
-    }
 }

@@ -1,11 +1,5 @@
 package ru.coffee.config;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,19 +9,20 @@ import java.util.Properties;
 public class DBConnection {
 
     private Properties properties;
-    public DBConnection(Properties properties) {
+    private String sqlScript;
+    public DBConnection(Properties properties, String sqlScript) {
         this.properties = properties;
-//        createConnectionAndTable();
+        this.sqlScript = sqlScript;
+        createConnectionAndTable();
     }
 
     private void createConnectionAndTable() {
         Connection connection = getConnection();
         try {
             Statement initTable = connection.createStatement();
-            String sqlScript = new String(Files.readAllBytes(Paths.get("src/main/resources/initdb.sql")));
             initTable.executeUpdate(sqlScript);
 
-        } catch (SQLException | IOException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
