@@ -2,7 +2,7 @@ package ru.coffee.repository;
 
 import java.util.List;
 
-public interface ServletRepository<T, D> extends WorkingWithBD {
+public interface ServletRepository<T, D> {
 
     D changePersonsScore(D personDto);
 

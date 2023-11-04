@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import ru.coffee.Application;
 import ru.coffee.config.DBConnection;
-import ru.coffee.domain.dto.PersonDto;
 import ru.coffee.domain.dto.PersonDtoWithServlet;
 import ru.coffee.mapper.PersonMapper;
 import ru.coffee.repository.ConsoleRepository;
@@ -78,7 +77,6 @@ public class PersonsServlet extends HttpServlet {
         }
         String requestBodyString = requestBody.toString();
         PersonDtoWithServlet personDto = mapper.readValue(requestBodyString, PersonDtoWithServlet.class);
-        System.out.println(personDto);
         servletService.changePersonsScore(personDto);
         resp.setStatus(HttpServletResponse.SC_OK);
         resp.setContentType("application/json");
@@ -90,8 +88,8 @@ public class PersonsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         Integer personClass = Integer.valueOf(req.getParameter("class"));
-        List<PersonDto> personDtoList = servletService.findAverageScoreConcreteClass(personClass);
-        for (PersonDto personDto : personDtoList) {
+        List<PersonDtoWithServlet> personDtoList = servletService.findAverageScoreConcreteClass(personClass);
+        for (PersonDtoWithServlet personDto : personDtoList) {
             out.println(personDto.getName() + " " + personDto.getLastName() + " class: " +
                         personDto.getClassroom() + " average: " + personDto.getAverage());
         }

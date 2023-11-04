@@ -3,7 +3,7 @@ package ru.coffee.repository;
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface ConsoleRepository<T, D> extends WorkingWithBD {
+public interface ConsoleRepository<T, D> {
 
     T addPerson(T person);
 

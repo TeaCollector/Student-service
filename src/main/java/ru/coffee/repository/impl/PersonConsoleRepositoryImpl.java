@@ -15,7 +15,6 @@ public class PersonConsoleRepositoryImpl implements ConsoleRepository<Person, Pe
     private Connection connection;
     private PersonMapper mapper;
 
-
     public PersonConsoleRepositoryImpl(Connection connection, PersonMapper mapper) {
         this.connection = connection;
         this.mapper = mapper;

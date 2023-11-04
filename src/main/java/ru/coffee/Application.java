@@ -7,7 +7,6 @@ import ru.coffee.service.ConsoleService;
 
 import java.io.*;
 
-
 public class Application {
 
     private final ConsoleService<Person, PersonDto> consoleService;
