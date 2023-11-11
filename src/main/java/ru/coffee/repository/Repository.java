@@ -4,13 +4,13 @@ package ru.coffee.repository;
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface Repository<T, D> {
+public interface Repository<T> {
 
     T addPerson(T person);
 
     List<BigDecimal> averageScore();
 
-    List<D> excellentPerson();
+    List<T> excellentPerson();
 
-    List<D> personsAverage(String name);
+    List<T> personsAverage(String name);
 }

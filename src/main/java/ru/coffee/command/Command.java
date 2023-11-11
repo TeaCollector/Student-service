@@ -4,7 +4,7 @@ import ru.coffee.service.Service;
 
 import java.util.List;
 
-public interface Command<T, D> {
+public interface Command<T> {
 
-    List<D> execute(Service<T, D> service);
+    List<?> execute(Service<T> service);
 }

@@ -17,9 +17,9 @@ public class Main {
 
         PersonMapper personMapper = PersonMapper.INSTANCE;
 
-        Repository<Person, PersonDto> repository = new PersonRepositoryImpl(provider, personMapper);
+        Repository<PersonDto> repository = new PersonRepositoryImpl(provider, personMapper);
 
-        Service<Person, PersonDto> personService = new PersonServiceImpl(repository);
+        Service<PersonDto> personService = new PersonServiceImpl(repository);
 
         Application application = new Application(personService, personMapper);
 

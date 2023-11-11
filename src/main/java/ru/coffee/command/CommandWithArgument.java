@@ -4,8 +4,8 @@ import ru.coffee.service.Service;
 
 import java.util.List;
 
-public interface CommandWithArgument<T, D> {
+public interface CommandWithArgument<T> {
 
-    List<D> execute(Service<T, D> service, String lastName);
+    List<T> execute(Service<T> service, String lastName);
 
 }

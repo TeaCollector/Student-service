@@ -1,22 +1,21 @@
 package ru.coffee.service.impl;
 
 import ru.coffee.domain.dto.PersonDto;
-import ru.coffee.domain.model.Person;
 import ru.coffee.repository.Repository;
 import ru.coffee.service.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public class PersonServiceImpl implements Service<Person, PersonDto> {
+public class PersonServiceImpl implements Service<PersonDto> {
 
-    private final Repository<Person, PersonDto> repository;
+    private final Repository<PersonDto> repository;
 
-    public PersonServiceImpl(Repository<Person, PersonDto> repository) {
+    public PersonServiceImpl(Repository<PersonDto> repository) {
         this.repository = repository;
     }
 
-    public Person addPerson(Person person) {
+    public PersonDto addPerson(PersonDto person) {
         repository.addPerson(person);
         return person;
     }

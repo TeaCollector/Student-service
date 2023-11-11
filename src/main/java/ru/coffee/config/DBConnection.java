@@ -40,9 +40,14 @@ public class DBConnection {
             Statement initTable = connection.createStatement();
             String sqlScript = new String(Files.readAllBytes(Paths.get("src/main/resources/initdb.sql")));
             initTable.executeUpdate(sqlScript);
-
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

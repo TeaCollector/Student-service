@@ -13,11 +13,11 @@ public class CommandBuilder<T, D> {
         this.studentService = studentService;
     }
 
-    public List<D> action(Service<T, D> service, Command<T, D> command) {
+    public List<T> action(Service<T> service, Command<T> command) {
         return command.execute(service);
     }
 
-    public List<D> actionWithArgument(Service<T, D> service, CommandWithArgument<T, D> command, String lastName) {
+    public List<T> actionWithArgument(Service<T> service, CommandWithArgument<T> command, String lastName) {
         return command.execute(service, lastName);
     }
 }

@@ -2,7 +2,6 @@ package ru.coffee.repository.impl;
 
 import ru.coffee.config.DBConnection;
 import ru.coffee.domain.dto.PersonDto;
-import ru.coffee.domain.model.Person;
 import ru.coffee.mapper.PersonMapper;
 import ru.coffee.repository.Repository;
 
@@ -11,26 +10,29 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonRepositoryImpl implements Repository<Person, PersonDto> {
+public class PersonRepositoryImpl implements Repository<PersonDto> {
 
+    private DBConnection dbConnection;
     private Connection connection;
     private PersonMapper mapper;
 
 
-    public PersonRepositoryImpl(DBConnection connection, PersonMapper mapper) {
-        this.connection = connection.getConnection();
+    public PersonRepositoryImpl(DBConnection dbConnection, PersonMapper mapper) {
+        this.dbConnection = dbConnection;
         this.mapper = mapper;
     }
 
     @Override
-    public Person addPerson(Person person) {
+    public PersonDto addPerson(PersonDto person) {
 
         String insertIntoPersonProgress = "INSERT INTO person_progress (physic, mathematics, rus, literature, geometry,informatics) " +
                                           "VALUES (?, ?, ?, ?, ?, ?);";
 
         String insertIntoPerson = "INSERT INTO person (name, last_name, age, class_id) " +
                                   "VALUES (?, ?, ?, ?) ";
-        try {
+        try  {
+            connection = dbConnection.getConnection();
+            connection.setAutoCommit(false);
             PreparedStatement statement;
             statement = connection.prepareStatement(insertIntoPersonProgress);
             statement.setInt(1, person.getPhysics());
@@ -47,9 +49,20 @@ public class PersonRepositoryImpl implements Repository<Person, PersonDto> {
             statement.setInt(3, person.getAge());
             statement.setInt(4, person.getClassroom());
             statement.executeUpdate();
-
-        } catch (SQLException e) {
+            connection.commit();
+        } catch(SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
             throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
         return person;
     }
@@ -73,6 +86,7 @@ public class PersonRepositoryImpl implements Repository<Person, PersonDto> {
                          "ON p.pp_id = pp.pp_id ";
 
         try {
+            connection = dbConnection.getConnection();
             connection.setAutoCommit(false);
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(average);
@@ -88,6 +102,12 @@ public class PersonRepositoryImpl implements Repository<Person, PersonDto> {
                 throw new RuntimeException(ex);
             }
             throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
         return personDtoList;
     }
@@ -107,25 +127,24 @@ public class PersonRepositoryImpl implements Repository<Person, PersonDto> {
                      "AND pp.informatics = 5";
         Statement statement;
         try {
-            connection.setAutoCommit(false);
+            connection = dbConnection.getConnection();
             statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
-                Person person = Person.builder()
+                PersonDto personDto = PersonDto.builder()
                         .name(rs.getString("name"))
                         .lastName(rs.getString("last_name"))
                         .build();
-                PersonDto personDto = mapper.personToPersonDto(person);
                 personDtoList.add(personDto);
             }
-            connection.commit();
         } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } finally {
             try {
-                connection.rollback();
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
+                connection.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-            throw new RuntimeException(e);
         }
         return personDtoList;
     }
@@ -147,13 +166,12 @@ public class PersonRepositoryImpl implements Repository<Person, PersonDto> {
             statement.setString(1, lastName);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                Person person = Person.builder()
+                PersonDto personDto = PersonDto.builder()
                         .name(rs.getString("name"))
                         .lastName(rs.getString("last_name"))
                         .average(rs.getDouble("average_score"))
                         .classroom(rs.getInt("class_id"))
                         .build();
-                PersonDto personDto = mapper.personToPersonDto(person);
                 personList.add(personDto);
             }
             connection.commit();
@@ -164,6 +182,12 @@ public class PersonRepositoryImpl implements Repository<Person, PersonDto> {
                 throw new RuntimeException(ex);
             }
             throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
         return personList;
     }

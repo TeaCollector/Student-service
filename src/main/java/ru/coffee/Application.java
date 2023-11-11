@@ -9,7 +9,6 @@ import ru.coffee.command.impl.FindAverageScoreOfPerson;
 import ru.coffee.domain.dto.PersonDto;
 import ru.coffee.input.DataLoader;
 import ru.coffee.input.impl.DataFromFile;
-import ru.coffee.domain.model.Person;
 import ru.coffee.mapper.PersonMapper;
 import ru.coffee.service.Service;
 import ru.coffee.service.StudentService;
@@ -20,12 +19,12 @@ import java.util.List;
 
 public class Application {
 
-    private final Service<Person, PersonDto> service;
-    private final PersonMapper personMapper;
+    private final Service<PersonDto> service;
+    private final PersonMapper mapper;
 
-    public Application(Service<Person, PersonDto> service, PersonMapper personMapper) {
+    public Application(Service<PersonDto> service, PersonMapper mapper) {
         this.service = service;
-        this.personMapper = personMapper;
+        this.mapper = mapper;
     }
 
     /**
@@ -36,7 +35,7 @@ public class Application {
         DataLoader<BufferedReader> dataLoader = new DataFromFile();
         StudentService studentService = new StudentService(dataLoader);
         String[] personArray;
-        Person person;
+        PersonDto persondto;
         try {
 
             BufferedReader br = studentService.loadData();
@@ -44,9 +43,8 @@ public class Application {
             data = br.readLine();
             while ((data = br.readLine()) != null) {
                 personArray = data.split(";");
-                PersonDto personDtoFromFile = personMapper.stringToPersonDto(personArray);
-                person = personMapper.personDtoToPerson(personDtoFromFile);
-                service.addPerson(person);
+                persondto = mapper.stringToPersonDto(personArray);
+                service.addPerson(persondto);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -64,13 +62,13 @@ public class Application {
                 CommandBuilder commandBuilder = new CommandBuilder(studentService);
                 switch (actionFromConsole) {
                     case "1" -> {
-                        Command<Person, BigDecimal> avg = new AverageScore();
+                        Command<PersonDto> avg = new AverageScore();
                         List<BigDecimal> scoreList = commandBuilder.action(service, avg);
                         System.out.println("Average 10 class: " + scoreList.get(0));
                         System.out.println("Average 11 class: " + scoreList.get(1));
                     }
                     case "2" -> {
-                        Command<Person, PersonDto> excellent = new ExcellentPerson();
+                        Command<PersonDto> excellent = new ExcellentPerson();
                         List<PersonDto> personDtoList = commandBuilder.action(service, excellent);
                         for (PersonDto personDto : personDtoList) {
                             System.out.println("Name: " + personDto.getName() + " Last name: " + personDto.getLastName());
@@ -79,7 +77,7 @@ public class Application {
                     case "3" -> {
                         System.out.print("Enter last name: ");
                         String lastName = readerFromConsole.readLine();
-                        CommandWithArgument<Person, PersonDto> findPerson = new FindAverageScoreOfPerson();
+                        CommandWithArgument<PersonDto> findPerson = new FindAverageScoreOfPerson();
                         List<PersonDto> list = commandBuilder.actionWithArgument(service, findPerson, lastName);
                         for (PersonDto personDto : list) {
                             System.out.println("Name: " + personDto.getName() + " Last name: " + personDto.getLastName()
