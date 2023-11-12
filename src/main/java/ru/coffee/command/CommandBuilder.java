@@ -13,7 +13,7 @@ public class CommandBuilder<T, D> {
         this.studentService = studentService;
     }
 
-    public List<T> action(Service<T> service, Command<T> command) {
+    public List<?> action(Service<T> service, Command<T> command) {
         return command.execute(service);
     }
 

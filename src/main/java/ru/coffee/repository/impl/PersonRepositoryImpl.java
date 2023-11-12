@@ -30,7 +30,7 @@ public class PersonRepositoryImpl implements Repository<PersonDto> {
 
         String insertIntoPerson = "INSERT INTO person (name, last_name, age, class_id) " +
                                   "VALUES (?, ?, ?, ?) ";
-        try  {
+        try {
             connection = dbConnection.getConnection();
             connection.setAutoCommit(false);
             PreparedStatement statement;
@@ -50,7 +50,7 @@ public class PersonRepositoryImpl implements Repository<PersonDto> {
             statement.setInt(4, person.getClassroom());
             statement.executeUpdate();
             connection.commit();
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             try {
                 connection.rollback();
             } catch (SQLException ex) {
@@ -87,20 +87,14 @@ public class PersonRepositoryImpl implements Repository<PersonDto> {
 
         try {
             connection = dbConnection.getConnection();
-            connection.setAutoCommit(false);
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(average);
             if (resultSet.next()) {
                 personDtoList.add(resultSet.getBigDecimal("score10"));
                 personDtoList.add(resultSet.getBigDecimal("score11"));
             }
-            connection.commit();
         } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
+
             throw new RuntimeException(e);
         } finally {
             try {
@@ -138,8 +132,8 @@ public class PersonRepositoryImpl implements Repository<PersonDto> {
                 personDtoList.add(personDto);
             }
         } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } finally {
+            throw new RuntimeException(e);
+        } finally {
             try {
                 connection.close();
             } catch (SQLException e) {
@@ -161,7 +155,6 @@ public class PersonRepositoryImpl implements Repository<PersonDto> {
                      "ON c.class_id = p.class_id " +
                      "WHERE p.last_name = ?";
         try {
-            connection.setAutoCommit(false);
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, lastName);
             ResultSet rs = statement.executeQuery();
@@ -174,13 +167,8 @@ public class PersonRepositoryImpl implements Repository<PersonDto> {
                         .build();
                 personList.add(personDto);
             }
-            connection.commit();
+
         } catch (SQLException e) {
-            try {
-                connection.rollback();
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
             throw new RuntimeException(e);
         } finally {
             try {

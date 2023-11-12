@@ -2,7 +2,6 @@ package ru.coffee;
 
 import ru.coffee.config.DBConnection;
 import ru.coffee.domain.dto.PersonDto;
-import ru.coffee.domain.model.Person;
 import ru.coffee.mapper.PersonMapper;
 import ru.coffee.repository.Repository;
 import ru.coffee.repository.impl.PersonRepositoryImpl;
